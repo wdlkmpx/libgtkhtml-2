@@ -364,7 +364,11 @@ dom_Node_removeChild (DomNode *node, DomNode *oldChild, DomException *exc)
 DomBoolean
 dom_Node_hasChildNodes (DomNode *node)
 {
-	return (node->xmlnode->children != NULL);
+	// problem with libxml2-2.9.5+ +BUG+
+	if (node) {
+		return (node->xmlnode->children != NULL);
+	}
+	return FALSE;
 }
 
 /**
