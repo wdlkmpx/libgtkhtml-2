@@ -11,12 +11,6 @@ INCLUDES = \
 DGNOMELOCALEDIR=\"$(datadir)/locale\" \
 	-I../intl -I$(top_srcdir)/intl
 
-if HAVE_GNOME_VFS
-TESTGTKHTML = testgtkhtml
-else
-TESTGTKHTML =
-endif
-
 noinst_PROGRAMS = simple dom-test $(TESTGTKHTML)
 
 simple_SOURCES = 		\
@@ -53,5 +47,3 @@ testgtkhtml_LDADD = \
 	$(top_builddir)/libgtkhtml/libgtkhtml-2.la \
 	$(GTKHTML2_LIBS) $(GNOME_VFS_LIBS)
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

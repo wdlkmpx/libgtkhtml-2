@@ -55,5 +55,3 @@ test_atoms_SOURCES = \
 
 test_atoms_LDADD = libhtmlutil.la $(GTKHTML2_LIBS)
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

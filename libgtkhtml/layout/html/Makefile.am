@@ -38,5 +38,3 @@ libgtkhtmlinclude_HEADERS = \
 	htmlboxform.h		\
 	htmlboxembedded.h
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

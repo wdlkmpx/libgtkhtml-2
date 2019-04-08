@@ -25,5 +25,3 @@ libgtkhtmlinclude_HEADERS = \
 	htmlpainter.h \
 	htmlstylepainter.h
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

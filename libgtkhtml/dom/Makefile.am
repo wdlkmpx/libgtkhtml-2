@@ -21,5 +21,3 @@ libdom_la_LIBADD = \
 	$(top_builddir)/libgtkhtml/dom/views/libdomviews.la	\
 	$(top_builddir)/libgtkhtml/dom/traversal/libdomtraversal.la
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

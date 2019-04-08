@@ -29,5 +29,3 @@ libgtkhtmlinclude_HEADERS = 	\
 	dom-htmltextareaelement.h	\
 	dom-htmlcollection.h
 
-MAINTAINERCLEANFILSE =	\
-	Makefile.in

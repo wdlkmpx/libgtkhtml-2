@@ -21,5 +21,3 @@ libgtkhtmlinclude_HEADERS = \
 	htmldocument.h \
 	htmlparser.h
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

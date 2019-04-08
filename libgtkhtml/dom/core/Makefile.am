@@ -42,5 +42,3 @@ libgtkhtmlinclude_HEADERS = 	\
 
 libdomcore_la_LIBADD = $(GTKHTML2_LIBS)
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

@@ -45,16 +45,6 @@
 #include "htmlview.h"
 #include "config.h"
 
-#ifdef ENABLE_ACCESSIBILITY
-#include "layout/htmlboxtable.h"
-#include "a11y/htmlviewaccessiblefactory.h"
-#include "a11y/htmlaccessiblefactory.h"
-#include "a11y/htmlboxblockaccessible.h"
-#include "a11y/htmlboxembeddedaccessible.h"
-#include "a11y/htmlboxaccessible.h"
-#include "a11y/htmlboxtableaccessible.h"
-#endif
-
 enum {
 	MOVE_CURSOR,
 	REQUEST_OBJECT,
@@ -76,15 +66,6 @@ static void html_view_try_jump (HtmlView *view);
 static void html_view_set_saved_focus (HtmlView *view);
 static DomElement* html_view_get_and_unset_saved_focus (HtmlView *view);
 static void html_view_focus_element (HtmlView *view);
-
-#ifdef ENABLE_ACCESSIBILITY
-static AtkObject *  html_view_get_accessible (GtkWidget *widget);
-
-HTML_ACCESSIBLE_FACTORY (HTML_TYPE_BOX_BLOCK_ACCESSIBLE, html_box_block_accessible)
-HTML_ACCESSIBLE_FACTORY (HTML_TYPE_BOX_EMBEDDED_ACCESSIBLE, html_box_embedded_accessible)
-HTML_ACCESSIBLE_FACTORY (HTML_TYPE_BOX_ACCESSIBLE, html_box_accessible)
-HTML_ACCESSIBLE_FACTORY (HTML_TYPE_BOX_TABLE_ACCESSIBLE, html_box_table_accessible)
-#endif
 
 static GQuark quark_moving_focus_out = 0;
 static GQuark quark_cursor_position = 0;
@@ -443,23 +424,10 @@ static void
 html_view_notify_cursor_position (HtmlView *view)
 {
 	HtmlBoxText *box_text;
-#ifdef ENABLE_ACCESSIBILITY
-	AtkObject *obj;
-	gint offset;
-#endif /* ENABLE_ACCESSIBILITY */
 
 	box_text = _html_view_get_cursor_box_text (view, NULL);	
 	if (box_text) {
 		html_view_update_focus_element (view, HTML_BOX (box_text), 0);
-#ifdef ENABLE_ACCESSIBILITY
-		obj = atk_gobject_accessible_for_object (G_OBJECT (box_text));
-		if (!ATK_IS_NO_OP_OBJECT (obj)) {
-			/* Accessibility is enabled */
-			g_return_if_fail (ATK_IS_TEXT (obj));
-			offset = atk_text_get_caret_offset (ATK_TEXT (obj));
-			g_signal_emit_by_name (obj, "text-caret-moved", offset);
-		}
-#endif /* ENABLE_ACCESSIBILITY */
 	}
 	return;
 }
@@ -1740,24 +1708,6 @@ html_view_relayout (HtmlView *view)
 
 		if (view->jump_to_anchor)
 			html_view_try_jump (view);
-#ifdef ENABLE_ACCESSIBILITY
-		{
-		AtkObject *child;
-		/*
-		 * If a new HTML page has been displayed and accessibility 
-		 * is enabled we wish to notify that relayout has been called.
-		 * The accessibility code will be able to figure out if a new 
-		 * root has been added to the HtmlView.
-		 *
-		 * The following code achieves that purpose. It would be
-		 * better to define a new signal on HtmlView but that would
-		 * break binary compatibility.
-		 */ 
-		child  = atk_object_ref_accessible_child (gtk_widget_get_accessible (GTK_WIDGET (view)), 0); 
-		if (child)
-			g_object_unref (child);
-		}
-#endif
 	}
 	if (view->relayout_timeout_id != 0) {
 		g_source_remove (view->relayout_timeout_id);
@@ -2961,10 +2911,6 @@ html_view_class_init (HtmlViewClass *klass)
 	widget_class->enter_notify_event = html_view_enter_notify;
 	widget_class->leave_notify_event = html_view_leave_notify;
 
-#ifdef ENABLE_ACCESSIBILITY
-	widget_class->get_accessible = html_view_get_accessible;
-#endif
-
 	container_class->set_focus_child = html_view_set_focus_child;
 	
 	klass->move_cursor = html_view_real_move_cursor;
@@ -3314,45 +3260,3 @@ html_view_focus_element (HtmlView *view)
 	}
 	gtk_widget_queue_draw (GTK_WIDGET (view));
 }
-
-#ifdef ENABLE_ACCESSIBILITY
-
-static AtkObject *
-html_view_get_accessible (GtkWidget *widget)
-{
-        static gboolean first_time = TRUE;
-
-	if (first_time) {
-		AtkObjectFactory *factory;
-		AtkRegistry *registry;
-		GType derived_type;
-		GType derived_atk_type;
-
-		/*
-		 * Figure out whether accessibility is enabled by looking at the
-		 * type of the accessible object which would be created for 
-		 * the parent type of HtmlView.
-		 */
-		derived_type = g_type_parent (HTML_TYPE_VIEW);
-
-		registry = atk_get_default_registry ();
-		factory = atk_registry_get_factory (registry,
-						    derived_type);
-		derived_atk_type = atk_object_factory_get_accessible_type (factory);
-		if (g_type_is_a (derived_atk_type, GTK_TYPE_ACCESSIBLE)) {
-			/*
-			 * Specify what factory to use to create accessible
-			 * objects
-			 */
-			HTML_ACCESSIBLE_SET_FACTORY (HTML_TYPE_VIEW, html_view_accessible);
-			HTML_ACCESSIBLE_SET_FACTORY (HTML_TYPE_BOX_BLOCK, html_box_block_accessible);
-			HTML_ACCESSIBLE_SET_FACTORY (HTML_TYPE_BOX_EMBEDDED, html_box_embedded_accessible);
-			HTML_ACCESSIBLE_SET_FACTORY (HTML_TYPE_BOX, html_box_accessible);
-			HTML_ACCESSIBLE_SET_FACTORY (HTML_TYPE_BOX_TABLE, html_box_table_accessible);
-		}
-		first_time = FALSE;
-	}
-	return GTK_WIDGET_CLASS (parent_class)->get_accessible (widget);
-}
-
-#endif /* ENABLE_ACCESSIBILITY */

@@ -34,5 +34,3 @@ libgtkhtmlinclude_HEADERS = 	\
 
 libdomevents_la_LIBADD = $(GTKHTML2_LIBS)
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

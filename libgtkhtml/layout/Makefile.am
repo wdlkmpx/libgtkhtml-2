@@ -52,5 +52,3 @@ libgtkhtmlinclude_HEADERS =	\
 
 libhtmllayout_la_LIBADD = $(top_builddir)/libgtkhtml/layout/html/libhtmllayouthtml.la
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

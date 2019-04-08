@@ -31,6 +31,3 @@ EXTRA_DIST =			\
 	test8.html		\
 	test9.html		\
 	themes.html
-
-MAINTAINERCLEANFILES =		\
-	Makefile.in

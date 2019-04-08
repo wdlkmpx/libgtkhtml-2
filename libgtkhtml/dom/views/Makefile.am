@@ -16,5 +16,3 @@ libgtkhtmlinclude_HEADERS = \
 	dom-abstractview.h \
 	dom-documentview.h
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

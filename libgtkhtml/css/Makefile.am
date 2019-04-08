@@ -23,5 +23,3 @@ libgtkhtmlinclude_HEADERS = \
 	cssstylesheet.h \
 	cssvalue.h 
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

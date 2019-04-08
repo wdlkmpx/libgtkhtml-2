@@ -26,5 +26,3 @@ libgtkhtmlinclude_HEADERS = 	\
 
 libdomtraversal_la_LIBADD = $(GTKHTML2_LIBS) 
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in

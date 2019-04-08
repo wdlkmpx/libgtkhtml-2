@@ -18,5 +18,3 @@ libgtkhtmlinclude_HEADERS = \
 	htmlview.h \
 	htmlselection.h
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in
