@@ -1,6 +1,6 @@
 libgtkhtmlincludedir = $(includedir)/gtkhtml-2.0/libgtkhtml/graphics
 
-INCLUDES = -I$(top_srcdir) \
+AM_CPPFLAGS = -I$(top_srcdir) \
 	-I$(top_srcdir)/libgtkhtml \
 	$(GTKHTML2_CFLAGS) \
 	-DG_LOG_DOMAIN=\"HtmlGraphics\"

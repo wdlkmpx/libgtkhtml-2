@@ -1,6 +1,6 @@
 libgtkhtmlincludedir = $(includedir)/gtkhtml-2.0/libgtkhtml/dom/traversal
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir) 		\
 	-I$(top_srcdir)/src/dom		\
 	-I$(top_srcdir)/src/dom/core	\

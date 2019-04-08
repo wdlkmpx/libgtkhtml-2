@@ -1,6 +1,6 @@
 SUBDIRS = samples
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/libgtkhtml \
 	$(GTKHTML2_CFLAGS) \
@@ -11,7 +11,7 @@ INCLUDES = \
 DGNOMELOCALEDIR=\"$(datadir)/locale\" \
 	-I../intl -I$(top_srcdir)/intl
 
-noinst_PROGRAMS = simple dom-test $(TESTGTKHTML)
+noinst_PROGRAMS = simple dom-test
 
 simple_SOURCES = 		\
 	simple.c
@@ -33,17 +33,4 @@ dom_test_SOURCES = 		\
 dom_test_LDADD = 			\
 	$(top_builddir)/libgtkhtml/libgtkhtml-2.la \
 	$(GTKHTML2_LIBS)
-
-testgtkhtml_SOURCES = 		\
-	debug.c			\
-	debug.h			\
-	browser-window.c	\
-	browser-window.h	\
-	prop-editor.c		\
-	prop-editor.h		\
-	main.c
-
-testgtkhtml_LDADD = \
-	$(top_builddir)/libgtkhtml/libgtkhtml-2.la \
-	$(GTKHTML2_LIBS) $(GNOME_VFS_LIBS)
 

@@ -1,6 +1,6 @@
 libgtkhtmlincludedir = $(includedir)/gtkhtml-2.0/libgtkhtml/dom/events
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir) 		\
 	-I$(top_srcdir)/libgtkhtml	\
 	$(GTKHTML2_CFLAGS) 

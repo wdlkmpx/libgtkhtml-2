@@ -1,6 +1,6 @@
 libgtkhtmlincludedir = $(includedir)/gtkhtml-2.0/libgtkhtml/util
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	$(GTKHTML2_CFLAGS) \
 	-DG_LOG_DOMAIN=\"HtmlUtil\"

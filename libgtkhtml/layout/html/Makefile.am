@@ -1,6 +1,6 @@
 libgtkhtmlincludedir = $(includedir)/gtkhtml-2.0/libgtkhtml/layout/html
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir)/libgtkhtml \
 	-I$(top_srcdir) \
 	$(GTKHTML2_CFLAGS) 
