@@ -1,4 +1,0 @@
-EXTRA_DIST = IDEAS
-
-MAINTAINERCLEANFILES =	\
-	Makefile.in

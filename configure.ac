@@ -1,12 +1,10 @@
 AC_PREREQ(2.52)
-AC_INIT(libgtkhtml/document/htmldocument.c)
 
 AM_CONFIG_HEADER(config.h)
+AC_INIT([libgtkhtml], [0.2.10], [wdlkmpx@github])
+AM_INIT_AUTOMAKE([-Wall -Wno-portability foreign])
 
-AM_INIT_AUTOMAKE(libgtkhtml, 2.11.1)
-
-AM_MAINTAINER_MODE
-
+AC_CONFIG_MACRO_DIRS([m4])
 AC_PROG_CC
 AC_ISC_POSIX
 AC_HEADER_STDC
@@ -71,7 +69,6 @@ AC_SUBST(A11Y)
 
 AC_OUTPUT([
 Makefile
-docs/Makefile
 libgtkhtml/Makefile
 libgtkhtml/css/Makefile
 libgtkhtml/document/Makefile

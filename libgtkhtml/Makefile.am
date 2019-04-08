@@ -37,5 +37,3 @@ libgtkhtml_2_la_LIBADD = \
 	$(top_builddir)/libgtkhtml/view/libhtmlview.la \
 	$(A11Y_LT_LIB) $(GTKHTML2_LIBS) $(GAILUTIL_LIBS)
 
-MAINTAINERCLEANFILES =	\
-	Makefile.in
