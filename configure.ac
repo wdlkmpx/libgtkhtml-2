@@ -1,7 +1,7 @@
 AC_PREREQ(2.52)
 
 AM_CONFIG_HEADER(config.h)
-AC_INIT([libgtkhtml], [0.2.10], [wdlkmpx@github])
+AC_INIT([libgtkhtml], [2.11.1.w.1], [wdlkmpx@github])
 AM_INIT_AUTOMAKE([-Wall -Wno-portability foreign])
 
 AC_CONFIG_MACRO_DIRS([m4])
